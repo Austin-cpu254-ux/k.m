@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kobiloz Cafe Menu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300,400,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        /* Universal Box-Sizing for consistent layout */
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        /* CSS Variables for easy color/value changes */
+        :root {
+            --primary-text: #2c3e50;
+            --secondary-text: #555;
+            --accent-color: #e74c3c; /* A modern red */
+            --accent-color-rgb: 231, 76, 60; /* RGB for rgba use */
+            --background-light: #f0f2f5;
+            --card-background: #ffffff;
+            --border-color: #ebf0f5;
+            --table-header-bg: #f7f9fc;
+            --hover-bg: #f0f8ff;
+            --shadow-light: rgba(0,0,0,0.05);
+            --shadow-medium: rgba(0,0,0,0.08);
+        }
+
+        /* Base Body Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 20px 15px; font-size: 1.05em; line-height: 1.7;
+            background-color: var(--background-light);
+            color: var(--primary-text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Container for Centering Content */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        /* Main Title Styling */
+        h1 {
+            text-align: center;
+            color: var(--primary-text);
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 40px;
+            letter-spacing: -0.03em;
+            text-shadow: 0 1px 2px var(--shadow-light);
+            text-transform: uppercase; 
+        }
+
+        /* Search Bar Container & Input Styling */
+        .search-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .search-container input[type="text"] {
+            width: 70%;
+            max-width: 500px;
+            padding: 15px 20px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1.1em;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .search-container input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(var(--accent-color-rgb), 0.2);
+        }
+
+        /* Menu Section Cards Styling */
+        .menu-section {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 35px;
+            margin-bottom: 40px;
+            box-shadow: 0 8px 25px var(--shadow-medium);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            
+            /* Background image properties */
+            background-size: cover; 
+            background-repeat: no-repeat;
+            background-position: center center;
+            opacity: 0.95; 
+            position: relative; 
+        }
+
+        /* Add specific background images for different sections using nth-child */
+        /* IMPORTANT: Replace 'image-name.jpg' with actual paths to your image files */
+        .menu-section:nth-child(2) { /* Hot Coffee */
+            background-image: url('coffee-pattern-light.jpg'); 
+            background-blend-mode: soft-light; 
+        }
+        .menu-section:nth-child(3) { /* Hot Beverages */
+            background-image: url('tea-leaves-pattern.jpg'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(4) { /* Herbals */
+            background-image: url('herbs-pattern-light.jpg'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(5) { /* Extras */
+            background-image: url('subtle-dots-pattern.png'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(6) { /* Full Breakfast */
+            background-image: url('breakfast-items-blur.jpg'); 
+            background-blend-mode: luminosity;
+        }
+        .menu-section:nth-child(7) { /* Cold Beverages */
+            background-image: url('drinks-blur-light.jpg'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(8) { /* Snacks */
+            background-image: url('snacks-pattern.png'); 
+            background-blend-mode: multiply;
+        }
+        .menu-section:nth-child(9) { /* Chicken Dishes */
+            background-image: url('grilled-chicken-texture.jpg'); 
+            background-blend-mode: overlay;
+        }
+        .menu-section:nth-child(10) { /* Fish Dishes */
+            background-image: url('fish-scale-pattern-light.png'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(11) { /* Mutton Dishes */
+            background-image: url('meat-texture-subtle.jpg'); 
+            background-blend-mode: overlay;
+        }
+        .menu-section:nth-child(12) { /* Beef Dishes */
+            background-image: url('steak-texture-light.jpg'); 
+            background-blend-mode: overlay;
+        }
+        .menu-section:nth-child(13) { /* Accomplishments */
+            background-image: url('plate-with-food-blur.jpg'); 
+            background-blend-mode: luminosity;
+        }
+        .menu-section:nth-child(14) { /* Pastries */
+            background-image: url('pastry-pattern-light.jpg'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(15) { /* Quick Bites */
+            background-image: url('fast-food-pattern.png'); 
+            background-blend-mode: multiply;
+        }
+        .menu-section:nth-child(16) { /* Milk Shake */
+            background-image: url('milkshake-blur.jpg'); 
+            background-blend-mode: luminosity;
+        }
+        .menu-section:nth-child(17) { /* Ice Cream */
+            background-image: url('ice-cream-pattern-light.png'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(18) { /* Smoothies */
+            background-image: url('fruit-smoothie-blur.jpg'); 
+            background-blend-mode: luminosity;
+        }
+        .menu-section:nth-child(19) { /* Vegetables */
+            background-image: url('vegetables-pattern-light.jpg'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(20) { /* Rice Dishes */
+            background-image: url('rice-texture-light.jpg'); 
+            background-blend-mode: soft-light;
+        }
+        .menu-section:nth-child(21) { /* Vegetable Salad Top Up */
+            background-image: url('salad-blur-light.jpg'); 
+            background-blend-mode: luminosity;
+        }
+
+        /* Section Heading Styling */
+        h2 {
+            color: var(--accent-color);
+            font-size: 2.2em;
+            font-weight: 600;
+            margin-top: 0;
+            margin-bottom: 25px;
+            text-align: left;
+            letter-spacing: -0.02em;
+            background-color: rgba(255, 255, 255, 0.8); 
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: inline-block; 
+        }
+
+        /* Table Styling (Base for larger screens) */
+        table {
+            width: 100%;
+            border-collapse: separate; 
+            border-spacing: 0;
+            margin-top: 15px;
+            background-color: rgba(255, 255, 255, 0.85); 
+            border-radius: 8px; 
+            overflow: hidden; 
+            box-shadow: 0 2px 10px var(--shadow-light);
+        }
+
+        /* Table Header and Data Cell Styling */
+        th, td {
+            padding: 16px 22px;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.98em;
+            color: var(--secondary-text);
+        }
+
+        th {
+            background-color: rgba(var(--accent-color-rgb), 0.1); 
+            color: var(--primary-text);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            font-size: 0.9em;
+        }
+
+        /* Alternate Row Backgrounds */
+        tr:nth-child(even) {
+            background-color: rgba(245, 245, 245, 0.7); 
+        }
+
+        /* Row Hover Effect */
+        tr:hover {
+            background-color: var(--hover-bg);
+            transition: background-color 0.2s ease-in-out;
+        }
+
+        /* Specific styling for Hot Coffee table to handle Single/Double columns on larger screens */
+        .hot-coffee-table th:first-child,
+        .hot-coffee-table td:first-child {
+            width: 55%; 
+        }
+        .hot-coffee-table th,
+        .hot-coffee-table td {
+            text-align: right; 
+        }
+        .hot-coffee-table th:first-child,
+        .hot-coffee-table td:first-child {
+            text-align: left; 
+        }
+
+        /* Responsive Adjustments for Mobile (768px and below) */
+        @media (max-width: 768px) {
+    body { font-size: 1.1em; }
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.4em; }
+
+            body {
+                padding: 20px 15px;
+            }
+            h1 {
+                font-size: 2em; /* Slightly smaller for phones */
+                margin-bottom: 25px;
+            }
+            .search-container input[type="text"] {
+                width: 95%; /* Wider search bar */
+                font-size: 1em;
+            }
+            h2 {
+                font-size: 1.6em; /* Smaller section titles */
+                margin-bottom: 20px;
+            }
+            .menu-section {
+                padding: 20px; /* Reduced padding */
+                margin-bottom: 25px;
+                background-size: cover; 
+            }
+            
+            /* Table-to-Card Transformation for Mobile */
+            table {
+                border: none; /* Remove outer table border for card look */
+                box-shadow: none; /* Remove table shadow, cards will have their own */
+                background-color: transparent; /* Allow card background to show */
+            }
+
+            table, thead, tbody, th, td, tr {
+                display: block; /* Make all table elements behave as block elements */
+            }
+
+            thead {
+                display: none; /* Hide the actual table header on small screens */
+            }
+
+            tr {
+                border: 1px solid var(--border-color); /* Add border to each row (card) */
+                margin-bottom: 15px; /* Space between cards */
+                border-radius: 8px; /* Rounded corners for cards */
+                background-color: var(--card-background); /* Card background */
+                box-shadow: 0 4px 15px var(--shadow-light); /* Shadow for cards */
+                overflow: hidden; /* Ensure rounded corners are respected */
+                padding: 10px 0; /* Vertical padding inside the card */
+            }
+
+            td {
+                border: none; /* Remove cell borders */
+                border-bottom: 1px solid var(--border-color); /* Add separator between fields in card */
+                position: relative; /* Needed for pseudo-element positioning */
+                padding-left: 50%; /* Space for the data-label */
+                text-align: right; /* Align value to the right */
+                font-size: 0.95em; /* Slightly adjusted font size */
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+            
+            /* Remove last border in a row-card */
+            tr td:last-child {
+                border-bottom: none;
+            }
+
+            /* Style for the generated data-label (header) */
+            td::before {
+                content: attr(data-label); /* Use the data-label content */
+                position: absolute;
+                left: 15px; /* Position to the left */
+                width: 45%; /* Give it space */
+                padding-right: 10px; /* Space between label and value */
+                font-weight: 600; /* Bold label */
+                text-align: left; /* Align label to the left */
+                color: var(--primary-text);
+                word-wrap: break-word; /* Allow long labels to wrap */
+            }
+            
+            /* Adjust specific table styling for mobile to fit new layout */
+            .hot-coffee-table td:first-child,
+            .hot-coffee-table th:first-child {
+                text-align: right; /* For 'Item' label and value */
+                padding-left: 50%;
+            }
+            .hot-coffee-table td::before {
+                text-align: left;
+            }
+
+            /* Adjust search input width for very small screens */
+            @media (max-width: 480px) {
+                h1 {
+                    font-size: 1.6em;
+                }
+                h2 {
+                    font-size: 1.4em;
+                }
+                .search-container input[type="text"] {
+                    padding: 12px 15px;
+                }
+                .menu-section {
+                    padding: 15px;
+                }
+                th, td {
+                    font-size: 0.8em;
+                }
+                td {
+                    padding-left: 40%; /* Adjust space for label on very small screens */
+                }
+                td::before {
+                    left: 10px;
+                    width: 35%;
+                }
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Kobiloz Cafe - Menu</h1>
+
+        <div class="search-container">
+            <input type="text" id="menuSearch" onkeyup="filterMenu()" placeholder="Search menu items...">
+        </div>
+
+        <div class="menu-section">
+            <h2>Hot Coffee</h2>
+            <table class="hot-coffee-table">
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Single">Single</th>
+                        <th data-label="Double">Double</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Cappuccino</td><td data-label="Single">200</td><td data-label="Double">250</td></tr>
+                    <tr><td data-label="Item">Espresso</td><td data-label="Single">150</td><td data-label="Double">250</td></tr>
+                    <tr><td data-label="Item">Latte</td><td data-label="Single">150</td><td data-label="Double">300</td></tr>
+                    <tr><td data-label="Item">Americano</td><td data-label="Single">150</td><td data-label="Double">200</td></tr>
+                    <tr><td data-label="Item">Macchiatto</td><td data-label="Single">200</td><td data-label="Double">300</td></tr>
+                    <tr><td data-label="Item">Mocha</td><td data-label="Single">200</td><td data-label="Double">300</td></tr>
+                    <tr><td data-label="Item">Vanilla latte</td><td data-label="Single">180</td><td data-label="Double">200</td></tr>
+                    <tr><td data-label="Item">Caramel latte</td><td data-label="Single">180</td><td data-label="Double">200</td></tr>
+                    <tr><td data-label="Item">White Coffee</td><td data-label="Single">120</td><td data-label="Double">200</td></tr>
+                    <tr><td data-label="Item">Black Coffee</td><td data-label="Single">100</td><td data-label="Double">150</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Hot Beverages</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Black Tea Cup</td><td data-label="Price">40</td></tr>
+                    <tr><td data-label="Item">Black Tea Pot</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">English Tea Cup</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">English Tea Pot</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">African Tea Cup</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">African Tea Pot</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">White Milo/Chocolate</td><td data-label="Price">120</td></tr>
+                    <tr><td data-label="Item">White Milo/Chocolate</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Black Milo/Chocolate</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Black Milo/Chocolate</td><td data-label="Price">120</td></tr>
+                    <tr><td data-label="Item">Uji Power</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Uji Plain</td><td data-label="Price">100</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Herbals</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Dawa (Ginger, Lemon, Honey)</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Hot Water/Lemon</td><td data-label="Price">60</td></tr>
+                    <tr><td data-label="Item">Mint Tea</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Lemon Tea Plain</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Lemon Tea with Honey</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Tea masala</td><td data-label="Price">120</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Extras</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Honey</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Lemon</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Tea bags</td><td data-label="Price">20</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Full Breakfast</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Tea/Coffee/Milo/Chocolate (Pot), Toast/Chapati/Pancakes/Sausage, Beans, Fried Egg, Fruit, Juice</td><td data-label="Price">600</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Cold Beverages</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Mineral Water 300mls</td><td data-label="Price">25</td></tr>
+                    <tr><td data-label="Item">Mineral Water 500mls</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Mineral Water 1 L</td><td data-label="Price">90</td></tr>
+                    <tr><td data-label="Item">Mineral Water 1.5 L</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Dasani/Keringet water 500mls</td><td data-label="Price">70</td></tr>
+                    <tr><td data-label="Item">Dasani/Keringet water 1L</td><td data-label="Price">130</td></tr>
+                    <tr><td data-label="Item">Mala 200mls</td><td data-label="Price">30</td></tr>
+                    <tr><td data-label="Item">Mala 500mls</td><td data-label="Price">90</td></tr>
+                    <tr><td data-label="Item">Mala 1L</td><td data-label="Price">170</td></tr>
+                    <tr><td data-label="Item">Sweetened Mala 500mls</td><td data-label="Price">95</td></tr>
+                    <tr><td data-label="Item">Fresh Milk 500mls</td><td data-label="Price">70</td></tr>
+                    <tr><td data-label="Item">TCA Milk 200mls</td><td data-label="Price">40</td></tr>
+                    <tr><td data-label="Item">Yoghurt 250mls</td><td data-label="Price">65</td></tr>
+                    <tr><td data-label="Item">Yoghurt 500mls</td><td data-label="Price">105</td></tr>
+                    <tr><td data-label="Item">Fresh Juice 500mls</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">La Yoghurt 250mls</td><td data-label="Price">60</td></tr>
+                    <tr><td data-label="Item">La Yoghurt 500mls</td><td data-label="Price">110</td></tr>
+                    <tr><td data-label="Item">Soda 350mls</td><td data-label="Price">60</td></tr>
+                    <tr><td data-label="Item">Soda 500mls</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Soda 1L</td><td data-label="Price">120</td></tr>
+                    <tr><td data-label="Item">Soda 2L</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">Afia 200mls</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Afia 300mls</td><td data-label="Price">65</td></tr>
+                    <tr><td data-label="Item">Afia 500mls</td><td data-label="Price">90</td></tr>
+                    <tr><td data-label="Item">Minute Maid 200mls</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Minute Maid 500mls</td><td data-label="Price">190</td></tr>
+                    <tr><td data-label="Item">Predator</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Redbull</td><td data-label="Price">250</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Snacks</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Ndazi</td><td data-label="Price">30</td></tr>
+                    <tr><td data-label="Item">White Chapati</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Brown Chapati</td><td data-label="Price">60</td></tr>
+                    <tr><td data-label="Item">Toast</td><td data-label="Price">40</td></tr>
+                    <tr><td data-label="Item">Plain Pancake</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Fluffy Pancake</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Beef Samosa</td><td data-label="Price">70</td></tr>
+                    <tr><td data-label="Item">Veg Samosa</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Kebab</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Beef Sausage</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Fries Eggs (2)</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Spanish Omelette</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Plain Omelette</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Scrambled Eggs (2)</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Sweet Potatoes</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Arrow Roots</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Sandwich</td><td data-label="Price">400</td></tr>
+                    <tr><td data-label="Item">Bacon</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Boiled Eggs</td><td data-label="Price">50</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Chicken Dishes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Chicken Kienyeji</td><td data-label="Price">650</td></tr>
+                    <tr><td data-label="Item">Chicken Dry</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Chicken Wet</td><td data-label="Price">500</td></tr>
+                    <tr><td data-label="Item">Chicken Masala</td><td data-label="Price">600</td></tr>
+                    <tr><td data-label="Item">Stir Fry Chicken</td><td data-label="Price">500</td></tr>
+                    <tr><td data-label="Item">Chicken Wings Plain</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Chicken With Pilau</td><td data-label="Price">500</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Fish Dishes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Whole Tilapia Dry</td><td data-label="Price">600</td></tr>
+                    <tr><td data-label="Item">Whole Tilapia Wet Fry</td><td data-label="Price">650</td></tr>
+                    <tr><td data-label="Item">Coconut Fish</td><td data-label="Price">700</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Mutton Dishes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Mbuzi Stew</td><td data-label="Price">600</td></tr>
+                    <tr><td data-label="Item">Mbuzi Wet</td><td data-label="Price">550</td></tr>
+                    <tr><td data-label="Item">Mbuzi Dry Fry</td><td data-label="Price">500</td></tr>
+                    <tr><td data-label="Item">Matambo</td><td data-label="Price">400</td></tr>
+                    <tr><td data-label="Item">Mbuzi Plain</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Matambo Plain</td><td data-label="Price">250</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Beef Dishes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Beef Stew</td><td data-label="Price">450</td></tr>
+                    <tr><td data-label="Item">Beef Fry</td><td data-label="Price">500</td></tr>
+                    <tr><td data-label="Item">Beef Plain</td><td data-label="Price">400</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Accomplishments</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">House Platter (Rice, Chapati, Ugali, Chips, Roast Potatoes, Mashed Potatoes)</td><td data-label="Price">700</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Pastries</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Queen Cake</td><td data-label="Price">40</td></tr>
+                    <tr><td data-label="Item">Mint Cake</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">White Forest</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Cup Cake</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Black Forest</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Marble Cake</td><td data-label="Price">180</td></tr>
+                    <tr><td data-label="Item">Fruit Cake</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Swiss Roll</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Danish Roll</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Sausage Roll</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Croissants</td><td data-label="Price">80</td></tr>
+                    <tr><td data-label="Item">Banana Cake</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Meat Pie</td><td data-label="Price">90</td></tr>
+                    <tr><td data-label="Item">Vanilla Cake</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Chicken Pie</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">White Buns</td><td data-label="Price">50</td></tr>
+                    <tr><td data-label="Item">Muffins</td><td data-label="Price">80</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Quick Bites</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Chips Plain</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Chips Plain T/A</td><td data-label="Price">230</td></tr>
+                    <tr><td data-label="Item">Chips Masala</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">Chips Masala T/A</td><td data-label="Price">270</td></tr>
+                    <tr><td data-label="Item">Beef Burger</td><td data-label="Price">400</td></tr>
+                    <tr><td data-label="Item">Beef Burger with Chips</td><td data-label="Price">600</td></tr>
+                    <tr><td data-label="Item">Chicken Burger</td><td data-label="Price">450</td></tr>
+                    <tr><td data-label="Item">Chicken Burger with Chips</td><td data-label="Price">650</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Milk Shake</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Mango Milk Shake</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Banana Milk Shake</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Vanilla Milk Shake</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Chocolate Milk Shake</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Dates Milk Shake</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Oreo Milk Shake</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Espresso Milk Shake</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Strawberry Milk Shake</td><td data-label="Price">300</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Ice Cream</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Vanilla</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Chocolate</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Strawberry</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Mango</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Assorted</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">Ice cream Scoop (T/A)</td><td data-label="Price">120</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Smoothies</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Tropical</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Mango</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Banana</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Avocado</td><td data-label="Price">300</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Vegetables</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Peas</td><td data-label="Price">340</td></tr>
+                    <tr><td data-label="Item">Mixed Vegs</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">Managu</td><td data-label="Price">240</td></tr>
+                    <tr><td data-label="Item">Beans</td><td data-label="Price">230</td></tr>
+                    <tr><td data-label="Item">Lentils</td><td data-label="Price">180</td></tr>
+                    <tr><td data-label="Item">Managu Special (Served with Rice/Chapati/Ugali)</td><td data-label="Price">290</td></tr>
+                    <tr><td data-label="Item">Peas Plain</td><td data-label="Price">240</td></tr>
+                    <tr><td data-label="Item">Managu Plain</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Beans Plain</td><td data-label="Price">130</td></tr>
+                    <tr><td data-label="Item">Cabbage/Sukuma/Spinach</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Githeri</td><td data-label="Price">100</td></tr>
+                    <tr><td data-label="Item">Vegetable Salad</td><td data-label="Price">300</td></tr>
+                    <tr><td data-label="Item">Matoke Plain</td><td data-label="Price">150</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Rice Dishes</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Rice Plain</td><td data-label="Price">150</td></tr>
+                    <tr><td data-label="Item">Vegetables Rice</td><td data-label="Price">200</td></tr>
+                    <tr><td data-label="Item">Pilau</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">Egg Fried Rice</td><td data-label="Price">250</td></tr>
+                    <tr><td data-label="Item">Minji Special</td><td data-label="Price">390</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="menu-section">
+            <h2>Vegetable Salad Top Up</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th data-label="Item">Item</th>
+                        <th data-label="Price">Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td data-label="Item">Rice</td><td data-label="Price">450</td></tr>
+                    <tr><td data-label="Item">Pilau</td><td data-label="Price">500</td></tr>
+                    <tr><td data-label="Item">Chicken</td><td data-label="Price">650</td></tr>
+                    <tr><td data-label="Item">Fish</td><td data-label="Price">800</td></tr>
+                    <tr><td data-label="Item">Chapati</td><td data-label="Price">350</td></tr>
+                    <tr><td data-label="Item">Chips</td><td data-label="Price">500</td></tr>
+                    <tr><td data-label="Item">Chips Masala</td><td data-label="Price">550</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        function filterMenu() {
+            const input = document.getElementById('menuSearch');
+            const filter = input.value.toLowerCase();
+            const menuSections = document.querySelectorAll('.menu-section');
+
+            menuSections.forEach(section => {
+                let sectionHasVisibleItems = false;
+                const rows = section.querySelectorAll('tbody tr');
+
+                rows.forEach(row => {
+                    const rowText = row.textContent || row.innerText;
+
+                    if (rowText.toLowerCase().includes(filter)) {
+                        row.style.display = ''; 
+                        sectionHasVisibleItems = true;
+                    } else {
+                        row.style.display = 'none'; 
+                    }
+                });
+
+                if (filter === '' || sectionHasVisibleItems) {
+                    section.style.display = ''; 
+                } else {
+                    section.style.display = 'none'; 
+                }
+            });
+        }
+    </script>
+
+</body>
+</html>
